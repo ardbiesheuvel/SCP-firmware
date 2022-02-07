@@ -239,13 +239,7 @@ static int scmi_apcore_reset_address_set_handler(fwk_id_t service_id,
     }
 
     /* Check for alignment */
-    if (scmi_apcore_ctx.config->reset_register_width ==
-        MOD_SCMI_APCORE_REG_WIDTH_32) {
-        if ((parameters->reset_address_low % 4) != 0) {
-            return_values.status = (int32_t)SCMI_INVALID_PARAMETERS;
-            goto exit;
-        }
-    } else if ((parameters->reset_address_low % 8) != 0) {
+    if ((parameters->reset_address_low % 4) != 0) {
         return_values.status = (int32_t)SCMI_INVALID_PARAMETERS;
         goto exit;
     }
